@@ -4,6 +4,7 @@ import lombok.Getter;
 import space.simulation.spaceapplication.game.model.Entity;
 import space.simulation.spaceapplication.game.model.IMovable;
 import space.simulation.spaceapplication.game.model.Map;
+import space.simulation.spaceapplication.game.model.celestial.bodies.Planet;
 import space.simulation.spaceapplication.game.model.celestial.bodies.Star;
 import space.simulation.spaceapplication.game.service.EntityControlService;
 
@@ -46,6 +47,7 @@ public class ControlClass {
 
     public void start() {
         generateStars();
+        generatePlanets();
     }
 
     private void generateStars() {
@@ -56,6 +58,15 @@ public class ControlClass {
             int starRadiationRadius = (int) (Math.random() * (MAX_STAR_RADIATION_RADIUS - MIN_STAR_RADIATION_RADIUS + 1) + MIN_STAR_RADIATION_RADIUS);
             int starRadiationPower = (int) (Math.random() * (MAX_STAR_RADIATION_POWER - MIN_STAR_RADIATION_POWER + 1) + MIN_STAR_RADIATION_POWER);
             Entity entityToSpawn = new Star(starRadius, starRadiationRadius, starRadiationPower, starDamageRadius);
+            entityControlService.spawnEntityOnRandomCoordinates(entityToSpawn);
+        }
+    }
+
+    private void generatePlanets() {
+        int planetsAmount = (int) (Math.random() * MAX_PLANET_AMOUNT + MIN_PLANET_AMOUNT);
+        for (int i = 0; i < planetsAmount; i++) {
+            int planetRadius = (int) (Math.random() * MAX_STAR_RADIUS + MIN_STAR_RADIUS);
+            Entity entityToSpawn = new Planet(planetRadius);
             entityControlService.spawnEntityOnRandomCoordinates(entityToSpawn);
         }
     }
