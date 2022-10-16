@@ -1,4 +1,29 @@
 package space.simulation.spaceapplication.game.model.celestial.bodies;
 
-public class Star {
+import lombok.Getter;
+import lombok.Setter;
+import space.simulation.spaceapplication.game.model.Entity;
+
+public class Star extends Entity {
+    @Getter
+    @Setter
+    public Integer radiationRadius;
+
+    @Getter
+    @Setter
+    public Integer radiationPower;
+
+    @Getter
+    @Setter
+    private Integer damageRadius;
+
+    public Star(Integer radius, Integer radiationRadius, Integer radiationPower, Integer damageRadius) {
+        super();
+        entityType = Star.class;
+        this.radiationRadius = radiationRadius;
+        this.radiationPower = radiationPower;
+        this.damageRadius = damageRadius;
+        this.width = radius;
+        this.height = radius;
+    }
 }
