@@ -28,5 +28,5 @@ public abstract class Entity {
     @Setter
     protected boolean isDead = false;
 
-    public abstract void existOneTick();
+    // public abstract void existOneTick();
 }
