@@ -6,7 +6,7 @@ import space.simulation.spaceapplication.game.model.Map;
 import space.simulation.spaceapplication.game.model.celestial.bodies.Star;
 import space.simulation.spaceapplication.game.service.EntityControlService;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import static space.simulation.spaceapplication.game.config.SpaceAppConst.*;
@@ -25,7 +25,8 @@ public class ControlClass {
     public Map getInfoAboutMap() {
         return gameField;
     }
-    public Vector<Entity> getEntities() {
+
+    public ArrayList<Entity> getEntities() {
         return entityControlService.getEntities();
     }
 
@@ -41,7 +42,7 @@ public class ControlClass {
             int starRadiationRadius = (int) (Math.random() * (MAX_STAR_RADIATION_RADIUS - MIN_STAR_RADIATION_RADIUS + 1) + MIN_STAR_RADIATION_RADIUS);
             int starRadiationPower = (int) (Math.random() * (MAX_STAR_RADIATION_POWER - MIN_STAR_RADIATION_POWER + 1) + MIN_STAR_RADIATION_POWER);
             Entity entityToSpawn = new Star(starRadius, starRadiationRadius, starRadiationPower, starDamageRadius);
-            entityControlService.spawnEntityOnRandomCoordinates(entityToSpawn, gameField);
+            entityControlService.spawnEntityOnRandomCoordinates(entityToSpawn);
         }
     }
 }

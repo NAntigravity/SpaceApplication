@@ -3,38 +3,37 @@ package space.simulation.spaceapplication.game.service;
 import space.simulation.spaceapplication.game.model.Entity;
 import space.simulation.spaceapplication.game.model.Map;
 
-import java.util.Vector;
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class EntityControlService {
-    private final Vector<Entity> entities = new Vector<>();
+    private final ArrayList<Entity> entities = new ArrayList<>();
     private final Map gameField;
-    private Vector<Entity> entitiesToCreate = new Vector<>();
 
     public EntityControlService(Map map) {
         gameField = map;
     }
 
-    public Vector<Entity> getEntities() {
+    public ArrayList<Entity> getEntities() {
         return entities;
     }
 
     public void spawnEntityOnCoordinates(Entity entity, int x, int y) {
         entity.setCoordinateX(x);
         entity.setCoordinateY(y);
-        entitiesToCreate.add(entity);
+        entities.add(entity);
     }
 
-    public void spawnEntityOnRandomCoordinates(Entity entity, Map map) {
+    public void spawnEntityOnRandomCoordinates(Entity entity) {
         boolean flag = false;
         while (!flag) {
             int x = ThreadLocalRandom.current().nextInt(0, gameField.getWidth());
             int y = ThreadLocalRandom.current().nextInt(0, gameField.getHeight());
-            flag = trySetupCoordinates(entity, map, x, y);
+            flag = trySetupCoordinates(entity, x, y);
         }
     }
 
-    private boolean trySetupCoordinates(Entity entity, Map map, int x, int y) {
+    private boolean trySetupCoordinates(Entity entity, int x, int y) {
         boolean overlap = isOverlapByAnotherEntity(x, y, entity.getWidth(), entity.getHeight());
         if (!overlap) {
             spawnEntityOnCoordinates(entity, x, y);
