@@ -33,4 +33,20 @@ public class Map implements Serializable {
             tiles.add(tileVector);
         }
     }
+
+    public synchronized void updateTileOnCoordinate(Class tileType, int x, int y) {
+        Vector<Vector<Tile>> newTiles = new Vector<>();
+        for (int i = 0; i < height; i++) {
+            Vector<Tile> tileVector = new Vector<>();
+            for (int j = 0; j < width; j++) {
+                if (i == y && j == x) {
+                    tileVector.add(new Tile(tileType));
+                } else {
+                    tileVector.add(tiles.get(i).get(j));
+                }
+            }
+            newTiles.add(tileVector);
+        }
+        this.tiles = newTiles;
+    }
 }

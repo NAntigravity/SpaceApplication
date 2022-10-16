@@ -2,12 +2,12 @@ package space.simulation.spaceapplication.game;
 
 import lombok.Getter;
 import space.simulation.spaceapplication.game.model.Entity;
+import space.simulation.spaceapplication.game.model.IMovable;
 import space.simulation.spaceapplication.game.model.Map;
 import space.simulation.spaceapplication.game.model.celestial.bodies.Star;
 import space.simulation.spaceapplication.game.service.EntityControlService;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 import static space.simulation.spaceapplication.game.config.SpaceAppConst.*;
 
@@ -23,6 +23,20 @@ public class ControlClass {
     }
 
     public Map getInfoAboutMap() {
+        ArrayList<Entity> entities = getEntities();
+        for (Entity entity :
+                entities) {
+            if (!(entity instanceof IMovable)) {
+                for (int i = 0; i < entity.getWidth(); i++) {
+                    for (int j = 0; j < entity.getHeight(); j++) {
+                        gameField.updateTileOnCoordinate(
+                                entity.getEntityType(),
+                                entity.getCoordinateX() + i,
+                                entity.getCoordinateY() + j);
+                    }
+                }
+            }
+        }
         return gameField;
     }
 
