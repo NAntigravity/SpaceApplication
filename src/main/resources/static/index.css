@@ -6,13 +6,24 @@ html, body {
 .row {
     flex-wrap: nowrap;
 }
+
 body {
     display: flex;
     flex-direction: column;
     flex: 0 1 0;
 }
+
+img {
+    width: 37px;
+    height: 37px;
+}
+
 .tile {
     content: url(/img/tile/empty.png);
     width: 37px;
     height: 37px;
+}
+
+.star {
+    content: url(/img/tile/star_tile.png);
 }
