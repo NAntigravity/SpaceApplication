@@ -16,11 +16,19 @@ public class ControlClass {
     @Getter
     private final Map gameField;
     private final EntityControlService entityControlService;
+    private static ControlClass INSTANCE;
 
     public ControlClass() {
         gameField = new Map(40, 40);
         entityControlService = new EntityControlService(gameField);
         start();
+    }
+
+    public static ControlClass getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ControlClass();
+        }
+        return INSTANCE;
     }
 
     public Map getInfoAboutMap() {
